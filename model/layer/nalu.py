@@ -3,6 +3,7 @@ from torch import nn
 from model.cell.nalu import NaluCell
 
 
+# Source from https://github.com/bharathgs/NALU
 class NaluLayer(nn.Module):
     def __init__(self, input_shape, output_shape, n_layers, hidden_shape):
         super().__init__()

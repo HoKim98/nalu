@@ -4,6 +4,7 @@ from torch.nn.init import xavier_uniform_
 from torch.nn.functional import linear, hardtanh
 
 
+# Source from https://github.com/bharathgs/NALU
 class NacCell(nn.Module):
     """Basic NAC unit implementation
     from https://arxiv.org/pdf/1808.00508.pdf

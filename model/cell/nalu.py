@@ -5,6 +5,7 @@ from torch.nn.functional import linear, hardtanh
 from .nac import NacCell
 
 
+# Source from https://github.com/bharathgs/NALU
 class NaluCell(nn.Module):
     """Basic NALU unit implementation
     from https://arxiv.org/pdf/1808.00508.pdf
