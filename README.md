@@ -6,7 +6,7 @@ by _Andrew Trask, Felix Hill, Scott Reed, Jack Rae, Chris Dyer and Phil Blunsom_
 - _**4.3**_ Language to Number Translation Tasks
 
 ## Installation
-`git clone (this)`
+`git clone https://github.com/kerryeon/nalu`
 or download
 
 ## Requirements
