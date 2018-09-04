@@ -21,6 +21,7 @@ class NacCell(nn.Module):
 
         self.W_ = Parameter(Tensor(out_shape, in_shape))
         self.M_ = Parameter(Tensor(out_shape, in_shape))
+        #self.W = Parameter(hardtanh(self.W_, -1., 1.) * hardtanh(self.M_.sigmoid(), 0., 1.))
         self.W = Parameter(self.W_.tanh() * self.M_.sigmoid())
 
         xavier_uniform_(self.W_), xavier_uniform_(self.M_)

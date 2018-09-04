@@ -47,7 +47,7 @@ class Num:
         self.w = {v: k for k, v in self.m.items()}
 
     def generate(self, nums):
-        return [[self.w[w] for w in num2words(n).replace('-', ' ').replace(',', ' ,').split(' ')]
+        return [[self.w[w] for w in num2words(int(n)).replace('-', ' ').replace(',', ' ,').split(' ')]
                 for n in nums]
 
     def to_string(self, nums):
