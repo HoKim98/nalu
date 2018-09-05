@@ -1,4 +1,4 @@
-class _Num_Interface:
+class NumInterface:
 
     def __init__(self):
         pass

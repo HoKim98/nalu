@@ -25,10 +25,12 @@ Basic pytorch implementation _from bharathgs_ : https://github.com/bharathgs/NAL
 - [ ] More Languages
     - [x] English
     - [x] Korean
-    - [ ] Japanese
-    - [ ] Roman
-- [ ] Shuffle Dataset
-- [ ] Program Evaluation
-- [ ] Track Time in a Grid-World Environment
+    - [x] Japanese
+    - [x] Roman
+- [x] Shuffle Dataset
+- [ ] Furthermore
+    - [ ] _**4.2**_ MNIST Counting and Arithmetic Tasks
+    - [ ] _**4.4**_ Program Evaluation
+    - [ ] _**4.5**_ Track Time in a Grid-World Environment
 - [ ] Simplify code
 - [ ] Comments

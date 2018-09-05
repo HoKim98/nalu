@@ -1,6 +1,6 @@
 import torch
 from random import shuffle
-from lang.num.en_us import Num
+from lang.num.en import Num
 
 
 class DataManager:

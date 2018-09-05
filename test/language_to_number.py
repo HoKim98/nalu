@@ -8,7 +8,8 @@ from model.layer.nalu import NaluLayer
 from utils.data_manager import DataManager
 
 
-from lang.num.en_us import Num
+from lang.num.roman import Num
+#from lang.num.en import Num
 #from lang.num.ko_kr import Num
 data_util = DataManager(Num)
 

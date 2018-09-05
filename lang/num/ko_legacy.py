@@ -1,10 +1,10 @@
-from lang.num._interface import _Num_Interface
+from lang.num._interface import NumInterface
 
 
-class Num(_Num_Interface):
+class Num(NumInterface):
 
     def __init__(self):
-        super(_Num_Interface, self).__init__()
+        super(NumInterface, self).__init__()
         self.units_pow = [x for x in range(16, 21)]
         self.units = [x for x in range(13, 16)]
         self.nums = [x for x in range(3, 13)]

@@ -1,10 +1,10 @@
-from num2words import num2words
+from lang.num._interface_num2words import NumInterface
 
 
-class Num:
+class Num(NumInterface):
 
     def __init__(self):
-        self.m = {
+        m = {
             0: '',
             1: 'minus',
             2: 'zero',
@@ -44,14 +44,10 @@ class Num:
             36: 'trillion',
             37: 'quadrillion',
         }
-        self.w = {v: k for k, v in self.m.items()}
+        super().__init__(m, 'en')
 
-    def generate(self, nums):
-        return [[self.w[w] for w in num2words(int(n)).replace('-', ' ').replace(',', ' ,').split(' ')]
-                for n in nums]
+    def generate_pre(self, x):
+        return x.replace('-', ' ').replace(',', ' ,').split(' ')
 
-    def to_string(self, nums):
-        return [' '.join([self.m[x] for x in n]).replace(' ,', ',') for n in nums]
-
-    def __len__(self):
-        return len(self.m)
+    def to_string_pre(self, x):
+        return ' '.join(x).replace(' ,', ',')
