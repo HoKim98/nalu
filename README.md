@@ -27,6 +27,7 @@ Basic pytorch implementation _from bharathgs_ : https://github.com/bharathgs/NAL
     - [x] Korean
     - [x] Japanese
     - [x] Roman
+    - [ ] Mayan
 - [x] Shuffle Dataset
 - [ ] Furthermore
     - [ ] _**4.2**_ MNIST Counting and Arithmetic Tasks
