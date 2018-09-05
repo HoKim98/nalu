@@ -5,15 +5,12 @@ import torch.optim as optim
 from torch.nn.init import xavier_uniform_
 
 from model.layer.nalu import NaluLayer
+from utils.data_manager import DataManager
 
 
 from lang.num.en_us import Num
 #from lang.num.ko_kr import Num
-generator = Num()
-def make_dataset(num=1, MIN=0, MAX=1000):
-    y = torch.randint(MIN, MAX, (num, ))
-    x = generator.generate(y)
-    return x, y
+data_util = DataManager(Num)
 
 
 class Model(nn.Module):
@@ -23,14 +20,20 @@ class Model(nn.Module):
         self.num_hidden = num_hidden
         self.num_layers = num_lstm_layers
 
-        self.embedder = nn.Embedding(len(generator), num_hidden)
+        self.embedder = nn.Embedding(len(data_util), num_hidden)
         self.lstm = nn.LSTM(num_hidden, num_hidden, num_lstm_layers)
 
         #self.final = nn.Linear(num_hidden, 1)
         self.final = NaluLayer(num_hidden, 1, 1, 0)
 
         self.hidden = None
-        xavier_uniform_(self.embedder.weight)
+        with torch.no_grad():
+            for w in self.lstm.parameters():
+                if w.dim() == 2:
+                    xavier_uniform_(w)
+                else:
+                    w.fill_(0)
+            xavier_uniform_(self.embedder.weight)
 
     def init_hidden(self, batch_size=1):
         self.hidden = (torch.zeros(self.num_layers, batch_size, self.num_hidden),
@@ -46,19 +49,7 @@ class Model(nn.Module):
         return x
 
 
-def shuffle(data):
-    data_x, data_y = data
-    rand = torch.randperm(data_y.size(0))
-    print(data_x)
-    data_x = data_x[rand]
-    print(data_x)
-    data_y = data_y[rand]
-    return data_x, data_y
-
-
-data_train = make_dataset(1000)
-data_val = make_dataset(100)
-data_eval = make_dataset(100)
+data_train, data_val, data_eval = data_util.divide(data_util.generate())
 
 
 model = Model()
@@ -67,6 +58,7 @@ lr_drop = optim.lr_scheduler.ReduceLROnPlateau(op)
 
 
 def train(i):
+    global data_train
     N = len(data_train[0])
     loss_sum, accuracy = 0., 0
     for x, y in zip(*data_train):
@@ -85,7 +77,8 @@ def train(i):
             accuracy += int(int(y_ + .5) == int(y))
 
     loss_sum, accuracy = loss_sum / N, accuracy * 100 / N
-    print('Train MSE ', i, loss_sum, accuracy)
+    #print('Train MSE ', i, loss_sum, accuracy)
+    data_train = data_util.shuffle(data_train)
 
 
 def validate(i):
@@ -103,7 +96,7 @@ def validate(i):
             accuracy += int(int(y_ + .5) == int(y))
 
     loss_sum, accuracy = loss_sum / N, accuracy * 100 / N
-    print('Valid MAE ', i, loss_sum, accuracy)
+    #print('Valid MAE ', i, loss_sum, accuracy)
     lr_drop.step(loss_sum, i)
 
 
@@ -129,10 +122,8 @@ def eval(i):
 
 
 loss_min = 1.e+9
-for i in range(300):
+for i in range(3000):
     train(i)
     validate(i)
     eval(i)
-    data_train = make_dataset(1000)
-    #data_train = shuffle(data_train)
 print('min', loss_min)
