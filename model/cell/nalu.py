@@ -24,7 +24,7 @@ class NaluCell(nn.Module):
         self.nac = NacCell(in_shape, out_shape)
 
         xavier_uniform_(self.G)
-        self.eps = 1e-8
+        self.eps = 1e-10
         self.register_parameter('bias', None)
 
     def forward(self, x):
@@ -34,7 +34,7 @@ class NaluCell(nn.Module):
         ag = a * g
 
         log_in = self.nac(log(abs(x) + self.eps))
-        log_in = log_in.clamp(-32, 16)
+        #log_in = log_in.clamp(-32, 16)
         #log_in = hardtanh(log_in, -32., 16.)
         m = exp(log_in)
         md = m * (1 - g)

@@ -13,7 +13,7 @@ class Model(nn.Module):
         self.reduce_sum = reduce_sum
 
         self.embedder = nn.Embedding(num_embedding, num_hidden)
-        self.lstm = nn.LSTM(num_hidden, num_hidden, num_lstm_layers, bias=False)
+        self.lstm = nn.LSTM(num_hidden, num_hidden, num_lstm_layers, bias=True)
         self.final = NaluLayer(num_hidden, 1, 1, 0) if use_nalu else nn.Linear(num_hidden, 1)
 
         self.hidden = None
@@ -51,9 +51,9 @@ if __name__ == '__main__':
     parser.add_argument('--lang', type=str, default='en', choices=['en', 'ko', 'ja', 'roman', 'mayan'])
     parser.add_argument('--hidden', type=int, default=16, choices=[16, 32])
     parser.add_argument('--lstm-layers', type=int, default=1, choices=[1, 2])
-    parser.add_argument('--use-nalu', type=int, default=0, choices=[0, 1])
+    parser.add_argument('--use-nalu', type=int, default=1, choices=[0, 1])
     parser.add_argument('--lr', type=float, default=1e-2, choices=[1e-2, 1e-3])
-    parser.add_argument('--reduce-sum', type=int, default=0, choices=[0, 1])
+    parser.add_argument('--reduce-sum', type=int, default=1, choices=[0, 1])
     parser.add_argument('--reduce-lr', type=int, default=1, choices=[0, 1])
     parser.add_argument('--epochs', type=int, default=591)
     args = parser.parse_args()

@@ -7,6 +7,7 @@ class TrainManager:
     def __init__(self, model, optimizer, data_manager, reduce_lr, *data_group):
         self.model = model
         self.op = optimizer
+        #self.lr_drop = optim.lr_scheduler.ReduceLROnPlateau(self.op) if reduce_lr else None
         self.lr_drop = optim.lr_scheduler.ReduceLROnPlateau(self.op, min_lr=1e-3) if reduce_lr else None
 
         self.data_manager = data_manager
