@@ -15,8 +15,14 @@ or download
 3. `num2words` _from pip_
 
 ## Experiments
-`python ./test/simple_function.py`\
-`python ./test/language_to_number.py`
+    python ./test/simple_function.py
+    python ./test/language_to_number.py
+
+## Train TIP
+| Language to Number | Layer Size | Learning Rate |
+|--------------------|:----------:|:-------------:|
+|        LSTM        |     32     |     0.001     |
+|     LSTM + NALU    |     16     |      0.01     |
 
 ## Reference Source
 Basic pytorch implementation _from bharathgs_ : https://github.com/bharathgs/NALU
@@ -27,7 +33,7 @@ Basic pytorch implementation _from bharathgs_ : https://github.com/bharathgs/NAL
     - [x] Korean
     - [x] Japanese
     - [x] Roman
-    - [ ] Mayan
+    - [x] Mayan
 - [x] Shuffle Dataset
 - [ ] Furthermore
     - [ ] _**4.2**_ MNIST Counting and Arithmetic Tasks

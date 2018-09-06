@@ -24,18 +24,18 @@ class NaluCell(nn.Module):
         self.nac = NacCell(in_shape, out_shape)
 
         xavier_uniform_(self.G)
-        self.eps = 1e-5
+        self.eps = 1e-8
         self.register_parameter('bias', None)
 
     def forward(self, x):
-        g = linear(x, self.G, self.bias).sigmoid()
-        #g = hardtanh(linear(x, self.G, self.bias), 0., 1.)
+        #g = linear(x, self.G, self.bias).sigmoid()
+        g = hardtanh(linear(x, self.G, self.bias), 0., 1.)
         a = self.nac(x)
         ag = a * g
 
-        log_in = log(abs(x) + self.eps)
-        #log_in = hardtanh(log_in, -8., 8.)
-        m = exp(self.nac(log_in))
+        log_in = self.nac(log(abs(x) + self.eps))
+        log_in = hardtanh(log_in, -8., 8.)
+        m = exp(log_in)
         md = m * (1 - g)
 
         return ag + md
