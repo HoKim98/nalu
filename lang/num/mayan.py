@@ -24,7 +24,7 @@ class Num(NumInterface):
                 n = num % 20
                 result += self.m[4] * (n // 5)
                 result += self.m[3] * (n % 5)
-                result += ' '
+                result += self.m[5]
                 num //= 20
             return result[-2::-1]
         return [[self.w[w] for w in int_to_roman(int(n))] for n in nums]

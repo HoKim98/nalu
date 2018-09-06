@@ -28,13 +28,14 @@ class NaluCell(nn.Module):
         self.register_parameter('bias', None)
 
     def forward(self, x):
-        #g = linear(x, self.G, self.bias).sigmoid()
-        g = hardtanh(linear(x, self.G, self.bias), 0., 1.)
+        g = linear(x, self.G, self.bias).sigmoid()
+        #g = hardtanh(linear(x, self.G, self.bias), 0., 1.)
         a = self.nac(x)
         ag = a * g
 
         log_in = self.nac(log(abs(x) + self.eps))
-        log_in = hardtanh(log_in, -8., 8.)
+        log_in = log_in.clamp(-32, 16)
+        #log_in = hardtanh(log_in, -32., 16.)
         m = exp(log_in)
         md = m * (1 - g)
 

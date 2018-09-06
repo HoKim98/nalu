@@ -7,7 +7,7 @@ class TrainManager:
     def __init__(self, model, optimizer, data_manager, reduce_lr, *data_group):
         self.model = model
         self.op = optimizer
-        self.lr_drop = optim.lr_scheduler.ReduceLROnPlateau(self.op) if reduce_lr else None
+        self.lr_drop = optim.lr_scheduler.ReduceLROnPlateau(self.op, min_lr=1e-3) if reduce_lr else None
 
         self.data_manager = data_manager
         self.data_train, self.data_val, self.data_eval = data_group
@@ -23,7 +23,8 @@ class TrainManager:
             x = x.unsqueeze(1)
             y_ = self.model(x)
 
-            loss = (y_ - y).pow(2).mean()
+            loss = (y_ - y).abs().mean()
+            #loss = (y_ - y).pow(2).mean()
             if not torch.isnan(y_):
                 self.op.zero_grad()
                 loss.backward()
@@ -37,7 +38,7 @@ class TrainManager:
 
         loss_sum, accuracy = loss_sum / N, accuracy * 100 / N
         if verbose:
-            print('Train MSE ', self.epoch, loss_sum, accuracy)
+            print('Train MAE ', self.epoch, loss_sum, accuracy)
         self.data_train = self.data_manager.shuffle(self.data_train)
 
     def validate(self, verbose=False):

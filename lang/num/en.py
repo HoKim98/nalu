@@ -38,11 +38,11 @@ class Num(NumInterface):
             30: 'and',
             31: ',',
             32: 'hundred',
-            33: 'thousand',
-            34: 'million',
-            35: 'billion',
-            36: 'trillion',
-            37: 'quadrillion',
+            #33: 'thousand',
+            #34: 'million',
+            #35: 'billion',
+            #36: 'trillion',
+            #37: 'quadrillion',
         }
         super().__init__(m, 'en')
 
