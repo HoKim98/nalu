@@ -56,6 +56,7 @@ if __name__ == '__main__':
     parser.add_argument('--reduce-sum', type=int, default=1, choices=[0, 1])
     parser.add_argument('--reduce-lr', type=int, default=1, choices=[0, 1])
     parser.add_argument('--epochs', type=int, default=591)
+    parser.add_argument('--batch-size', type=int, default=30)
     args = parser.parse_args()
 
     Num = __import__('lang.num.%s' % args.lang, fromlist=['Num'])
@@ -70,7 +71,7 @@ if __name__ == '__main__':
 
     loss_min = 1.e+9
     for i in range(args.epochs):
-        trainer.train(verbose=True)
+        trainer.train(args.batch_size, verbose=True)
         trainer.validate()
         loss_min = min(loss_min, trainer.eval())
     print('min', loss_min)
