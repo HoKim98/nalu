@@ -23,6 +23,8 @@ or download
 |--------------------|:----------:|:-------------:|
 |        LSTM        |     32     |     0.001     |
 |     LSTM + NALU    |     16     |      0.01     |
+% Note that when only bias is not used,
+the experimental results of LSTM are better than those of the paper.
 
 ## Reference Source
 Basic pytorch implementation _from bharathgs_ : https://github.com/bharathgs/NALU

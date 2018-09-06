@@ -51,7 +51,7 @@ if __name__ == '__main__':
     parser.add_argument('--lang', type=str, default='en', choices=['en', 'ko', 'ja', 'roman', 'mayan'])
     parser.add_argument('--hidden', type=int, default=16, choices=[16, 32])
     parser.add_argument('--lstm-layers', type=int, default=1, choices=[1, 2])
-    parser.add_argument('--use-nalu', type=int, default=1, choices=[0, 1])
+    parser.add_argument('--use-nalu', type=int, default=0, choices=[0, 1])
     parser.add_argument('--lr', type=float, default=1e-2, choices=[1e-2, 1e-3])
     parser.add_argument('--reduce-sum', type=int, default=0, choices=[0, 1])
     parser.add_argument('--reduce-lr', type=int, default=1, choices=[0, 1])
