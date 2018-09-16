@@ -19,13 +19,10 @@ or download
     python ./test/language_to_number.py
 
 ## Train TIP
-| Language to Number | Layer Size | Learning Rate |
-|--------------------|:----------:|:-------------:|
-|        LSTM        |     32     |     0.001     |
-|     LSTM + NALU    |     16     |      0.01     |
-
-% Note that when only bias is not used,
-the experimental results of LSTM are better than those of the paper.
+| Language to Number | Layer Size | Learning Rate |            Plot             |
+|--------------------|:----------:|:-------------:|:---------------------------:|
+|      LSTM (en)     |     32     |      0.01     | ![Plot_LSTM](plot_lstm.svg) |
+|      NALU (en)     |     32     |      0.01     | ![Plot_NALU](plot_nalu.svg) |
 
 ## Reference Source
 Basic pytorch implementation _from bharathgs_ : https://github.com/bharathgs/NALU

@@ -1,10 +1,10 @@
-from lang.num._interface import NumInterface
+from lang.num._interface import NumInterface as _Base
 
 
-class Num(NumInterface):
+class Num(_Base):
 
     def __init__(self):
-        super(NumInterface, self).__init__()
+        super(Num, self).__init__()
         self.m = {
             0: '',
             1: '-',  # not exists
@@ -16,7 +16,7 @@ class Num(NumInterface):
         self.w = {v: k for k, v in self.m.items()}
 
     def generate(self, nums):
-        def int_to_roman(num):
+        def int_to_mayan(num):
             if num == 0:
                 return self.m[2]
             result = ''
@@ -27,10 +27,10 @@ class Num(NumInterface):
                 result += self.m[5]
                 num //= 20
             return result[-2::-1]
-        return [[self.w[w] for w in int_to_roman(int(n))] for n in nums]
+        return [[self.w[w] + [self.EOS] for w in int_to_mayan(int(n))] for n in nums]
 
     def to_string(self, nums):
-        return [''.join([self.m[x] for x in n]) for n in nums]
+        return [''.join([self.m[int(x)] for x in n]) for n in nums]
 
     def __len__(self):
         return len(self.m)

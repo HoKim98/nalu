@@ -1,4 +1,5 @@
 class NumInterface:
+    EOS = 0
 
     def __init__(self):
         pass

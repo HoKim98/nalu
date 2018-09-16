@@ -24,7 +24,7 @@ class NaluCell(nn.Module):
         self.nac = NacCell(in_shape, out_shape)
 
         xavier_uniform_(self.G)
-        self.eps = 1e-10
+        self.eps = 1e-7
         self.register_parameter('bias', None)
 
     def forward(self, x):

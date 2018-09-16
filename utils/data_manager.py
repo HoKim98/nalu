@@ -14,7 +14,7 @@ class DataManager:
         return x, y
 
     @classmethod
-    def divide(cls, data, size=(169, 200, 631, ), include=(list(range(0, 20)), [], [], )):
+    def divide(cls, data, size=(169, 200, 631, ), include=([], [], [], )):
         result = [[[d[j] for j in inc] for d in data] for inc in include]
         indices = list(range(sum(size)))
         for idx in sorted([j for sub in include for j in sub], reverse=True):
@@ -36,6 +36,9 @@ class DataManager:
         data_x = [data_x[r] for r in rand]
         data_y = data_y[rand]
         return data_x, data_y
+
+    def to_string(self, num):
+        return self._generator.to_string([num])[0]
 
     def __len__(self):
         return len(self._generator)

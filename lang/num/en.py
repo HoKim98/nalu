@@ -1,7 +1,7 @@
-from lang.num._interface_num2words import NumInterface
+from lang.num._interface_num2words import NumInterface as _Base
 
 
-class Num(NumInterface):
+class Num(_Base):
 
     def __init__(self):
         m = {

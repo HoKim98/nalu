@@ -19,11 +19,11 @@ class NumInterface(_Base):
         #return ' '.join(x)
 
     def generate(self, nums):
-        return [[self.w[w] for w in self.generate_pre(self.num2words(n))]
+        return [[self.w[w] for w in self.generate_pre(self.num2words(n))] + [self.EOS]
                 for n in nums]
 
     def to_string(self, nums):
-        return [self.to_string_pre([self.m_other[x] for x in n]) for n in nums]
+        return [self.to_string_pre([self.m_other[int(x)] for x in n[:-1]]) for n in nums]
 
     def num2words(self, num):
         return num2words(int(num), lang=self.lang)
